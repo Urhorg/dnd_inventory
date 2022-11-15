@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src='sql-browser.min.js'></script>
+    <script>
+        (async () => {
+            let res = await fetch('inventory.sqlite');
+            let arrayBuffer = await res.arrayBuffer();
+            let uInt8Array = new Uint8Array(arrayBuffer);
+            let db = new SQL.Database(uInt8Array);
+        })();
+    </script>
+    <input id='upload' type='file' />
+</head>
+
+<body>
+
+    <textarea id="field1"></textarea>
+    <script src="inventory.js"></script>
+</body>
+
+</html>
