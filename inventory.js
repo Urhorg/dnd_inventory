@@ -13,7 +13,7 @@ function loadBinaryFile(path, success) {
   xhr.send();
 };
 
-loadBinaryFile('./data/inventory.sqlite', function(data) {
+loadBinaryFile('inventory.sqlite', function(data) {
   const db = new SQL.Database(data);
   // Database is ready
 
