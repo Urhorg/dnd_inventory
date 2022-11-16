@@ -16,12 +16,46 @@ function loadBinaryFile(path, success) {
 loadBinaryFile('./data/inventory.sqlite', function(data) {
   const db = new SQL.Database(data);
   // Database is ready
-  
-  var res = db.exec("SELECT * FROM items");
-  
+
+  const res = db.exec("SELECT * FROM items");
+
   console.log(res);
-  field.innerHTML =
-    res[0].columns + "<br>"
-    +res[0].values[0] + "<br>"
-    +res[0].values[1];
+  /*field.innerHTML =
+    res[0].columns + "<br>" +
+    res[0].values[0] + "<br>" +
+    res[0].values[1];*/
+
+
+  const table1 = document.createElement("table");
+  
+  //añadir header
+  const thead = table1.createTHead();
+  const rowh = thead.insertRow();
+  res[0].columns.forEach(popRow, rowh);
+
+//añadir body
+const tbody = table1.createTBody();
+res[0].values.forEach(popCol, tbody);
+
+function popCol(index) {
+  let tb = this;
+  let row = tb.insertRow(index);
+  res[0].values.forEach(popRow, row)
+};
+
+  function popRow(value, index) {
+    let row = this;
+    let cell = row.insertCell(index);
+    cell.innerHTML = value;
+  };
+
+
+
+  //res[0].values.forEach(popRow);
+
+
+
+
+
+  document.getElementById("divtable").appendChild(table1);
 });
