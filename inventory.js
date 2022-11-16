@@ -4,58 +4,49 @@ function loadBinaryFile(path, success) {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", path, true);
   xhr.responseType = "arraybuffer";
-  xhr.onload = function() {
+  xhr.onload = function () {
     var data = new Uint8Array(xhr.response);
     var arr = new Array();
-    for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+    for (var i = 0; i != data.length; ++i)
+      arr[i] = String.fromCharCode(data[i]);
     success(arr.join(""));
   };
   xhr.send();
-};
+}
 
-loadBinaryFile('inventory.sqlite', function(data) {
+loadBinaryFile("inventory.sqlite", function (data) {
   const db = new SQL.Database(data);
   // Database is ready
 
   const res = db.exec("SELECT * FROM items");
-
-  console.log(res);
-  /*field.innerHTML =
-    res[0].columns + "<br>" +
-    res[0].values[0] + "<br>" +
-    res[0].values[1];*/
-
-
   const table1 = document.createElement("table");
-  
-  //añadir header
-  const thead = table1.createTHead();
-  const rowh = thead.insertRow();
-  res[0].columns.forEach(popRow, rowh);
+  popTable(res,table1);
 
-//añadir body
-const tbody = table1.createTBody();
-res[0].values.forEach(popCol, tbody);
+  //función crea-tablas
+  function popTable(array, table) {
+    //añadir header
+    const thead = table.createTHead();
+    const rowh = thead.insertRow();
+    array[0].columns.forEach(popRow, rowh);
 
-function popCol(index) {
-  let tb = this;
-  let row = tb.insertRow(index);
-  res[0].values.forEach(popRow, row)
-};
+    //añadir body
+    const tbody = table.createTBody();
+    array[0].values.forEach(popCol, tbody);
 
-  function popRow(value, index) {
-    let row = this;
-    let cell = row.insertCell(index);
-    cell.innerHTML = value;
-  };
+    function popCol(value, index) {
+      let tbody = this;
+      let row = tbody.insertRow(index);
+      value.forEach(popRow, row);
+    }
 
+    function popRow(value, index) {
+      let row = this;
+      let cell = row.insertCell(index);
+      cell.innerHTML = value;
+    }
 
-
-  //res[0].values.forEach(popRow);
-
-
-
-
-
-  document.getElementById("divtable").appendChild(table1);
+    let divTable = document.getElementById("divtable");
+    divTable.innerHTML = "";
+    divTable.appendChild(table);
+  }
 });
