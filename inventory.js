@@ -1,5 +1,3 @@
-let field = document.getElementById("p");
-
 function loadBinaryFile(path, success) {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", path, true);
