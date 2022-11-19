@@ -1,22 +1,32 @@
+body {
+  font-size: 100%;
+}
+
 #divtable {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  #divtable td, #divtable thead {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  #divtable tr:nth-child(even){background-color: #f2f2f2;}
-  
-  #divtable tr:hover {background-color: #ddd;}
-  
-  #divtable thead {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    background-color: #04AA6D;
-    color: white;
-  }
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8em;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#divtable td,
+#divtable thead {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#divtable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#divtable tr:hover {
+  background-color: #ddd;
+}
+
+#divtable thead {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #04AA6D;
+  color: white;
+}

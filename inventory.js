@@ -16,7 +16,7 @@ loadBinaryFile("inventory.sqlite", function (data) {
   const db = new SQL.Database(data);
   // Database is ready
 
-  const res = db.exec("SELECT * FROM items");
+  const res = db.exec('SELECT i.name as "Nombre", upper(substr(t.name,1,1))||lower(substr(t.name,2,length(t.name))) as "Tipo", i.price as "Precio", weight as "Peso", i.desc as "Descripción" FROM items i JOIN item_types t USING (id_type)');
   const table1 = document.createElement("table");
   popTable(res,table1);
 
